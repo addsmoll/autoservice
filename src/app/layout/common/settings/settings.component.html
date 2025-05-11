@@ -1,0 +1,584 @@
+<!--<div
+    class="settings-cog fixed flex items-center justify-center right-0 w-10 h-10 shadow-lg rounded-l-lg z-90 cursor-pointer bg-red-600 bg-opacity-90 print:hidden"
+    [class.lg:right-0]="config.layout === 'centered' || config.layout === 'material'"
+    [class.lg:right-16]="config.layout !== 'centered' && config.layout !== 'material'"
+    style="top: 275px"
+    (click)="settingsDrawer.toggle()">
+    <mat-icon
+        class="icon-size-5 text-white animate-spin-slow"
+        [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+</div>-->
+
+<button
+    #trig
+    class=" "
+    (click)="settingsDrawer.toggle()"
+    mat-icon-button
+    aria-label="settings"
+>
+    <mat-icon
+        class="text-black rotate-270"
+        [svgIcon]="'feather:triangle'"></mat-icon>
+</button>
+
+<fuse-drawer
+    class="w-screen sm:w-15 sm:min-w-15 z-999"
+    fixed
+    [mode]="'over'"
+    [name]="'settingsDrawer'"
+    [position]="'right'"
+    #settingsDrawer>
+    @defer(on interaction(trig)){
+    <ng-container *ngTemplateOutlet="commonView"></ng-container>
+    } @placeholder {
+    <div>Loading...</div>
+    }
+</fuse-drawer>
+
+<ng-template #commonView>
+    <aside class="flex flex-col justify-between w-full bg-card ">
+        <section>
+            <nav class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+                <h2 class="ml-3 text-lg font-semibold tracking-tight">{{'NAV.SETTINGS_APP' | translate}}</h2>
+                <button
+                    class="ml-auto"
+                    mat-icon-button
+                    (click)="settingsDrawer.close()">
+                    <mat-icon
+                        class="text-current icon-size-7"
+                        [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </button>
+            </nav>
+            <button class="flex flex-row cursor-pointer"    [routerLink]="['/help-center/about-us']">
+                <div class="w-10 my-4 ml-4 mr-2 ">
+                    <img width="200" height="107" ngSrc="../../../../assets/images/logo/deploy-pro-logo.png">
+                </div>
+                <h2 class="self-center text-lg font-semibold" [class.text-secondary]="config.scheme !== 'dark'">Deploy Pro</h2>
+            </button>
+            <a
+                [routerLink]="['/settings/account']"
+                class="mt-2 ml-2 flex flex-row gap-2 cursor-pointer">
+                <h6 class="font-medium text-lg " [class.text-secondary]="config.scheme !== 'dark'">{{'NAV.SETTINGS_ACCOUNT' | translate}}</h6>
+            </a>
+            <div class="flex flex-col px-6">
+                <div class="flex flex-row gap-2 font-medium text-secondary">
+                    <languages [isSetupText]="true"></languages>
+                </div>
+
+                <!-- <a
+                     [routerLink]="['/settings/account']"
+                     class="flex flex-row gap-2 font-medium text-gray-900 cursor-pointer">
+                     <mat-icon
+                         class="icon-size-4"
+                         [svgIcon]="'heroicons_outline:shield-check'"></mat-icon>
+
+                     <h6 class="self-center font-medium text-primary">{{'NAV.SETTINGS_PROFILE' | translate}}</h6>
+                 </a>-->
+
+                <!-- Theme -->
+                <!--<div class="text-md font-semibold text-secondary">THEME</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+                    <ng-container *ngFor="let theme of config.themes">
+                        <div
+                            class="flex items-center justify-center px-4 py-3 rounded-full cursor-pointer ring-inset ring-primary bg-hover"
+                            [class.ring-2]="config.theme === theme.id"
+                            [ngClass]="theme.id"
+                            (click)="setTheme(theme.id)">
+                            <div
+                                class="flex-0 w-3 h-3 rounded-full bg-primary"
+                            ></div>
+                            <div
+                                class="ml-2.5 font-medium leading-5 truncate"
+                                [class.text-secondary]="config.theme !== theme.id">
+                                {{theme.name}}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>-->
+
+                <hr class="my-8">
+
+                <!-- Scheme -->
+                <!--            <div class="text-md font-semibold text-secondary">SCHEME</div>-->
+                <div class="grid grid-cols-2 gap-3 justify-items-start mt-2">
+
+                    <!-- Auto -->
+                    <!--              <div
+                                      class="flex items-center py-3 pl-5 pr-6 rounded-full cursor-pointer ring-inset ring-primary bg-hover"
+                                      [class.ring-2]="config.scheme === 'auto'"
+                                      matTooltip="Automatically sets the scheme based on user's operating system's color scheme preference using 'prefer-color-scheme' media query."
+                                      (click)="setScheme('auto')">
+                                      <div class="flex items-center rounded-full overflow-hidden">
+                                          <mat-icon
+                                              class="icon-size-5"
+                                              [svgIcon]="'heroicons_outline:lightning-bolt'"></mat-icon>
+                                      </div>
+                                      <div
+                                          class="flex items-center ml-2 font-medium leading-5"
+                                          [class.text-secondary]="config.scheme !== 'auto'">
+                                          Auto
+                                      </div>
+                                  </div>-->
+                    <!-- Dark -->
+                    <div
+                        class="flex items-center py-3 pl-5 pr-6 rounded-full cursor-pointer ring-inset ring-primary bg-hover"
+                        [class.ring-2]="config.scheme === 'dark'"
+                        (click)="setScheme('dark')">
+                        <div class="flex items-center rounded-full overflow-hidden">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_outline:moon'"></mat-icon>
+                        </div>
+                        <div
+                            class="flex items-center ml-2 font-medium leading-5"
+                            [class.text-secondary]="config.scheme !== 'dark'">
+                            Dark
+                        </div>
+                    </div>
+                    <!-- Light -->
+                    <div
+                        class="flex items-center py-3 pl-5 pr-6 rounded-full cursor-pointer ring-inset ring-primary bg-hover"
+                        [class.ring-2]="config.scheme === 'light'"
+                        (click)="setScheme('light')">
+                        <div class="flex items-center rounded-full overflow-hidden">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_outline:sun'"></mat-icon>
+                        </div>
+                        <div
+                            class="flex items-center ml-2 font-medium leading-5"
+                            [class.text-secondary]="config.scheme !== 'light'">
+                            Light
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-8">
+
+                <div class="flex flex-col gap-8">
+                    <!--
+                                        <a
+                                            [routerLink]="['/help-center/about-us']"
+                                            class=" flex flex-row gap-2 font-medium text-primary cursor-pointer">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+
+                                            <h6>{{'NAV.ABOUT_US' | translate}}</h6>
+                                        </a>-->
+                    <a
+                        [routerLink]="['/places-settings/new']"
+                        class=" flex flex-row gap-2 font-medium text-primary cursor-pointer">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'feather:plus'"></mat-icon>
+
+                        <h6>{{'NAV.CREATE_NEW_PLACE' | translate}}</h6>
+                    </a>
+
+                </div>
+
+
+
+
+                <!-- Layout -->
+                <!--        <div class="text-md font-semibold text-secondary">LAYOUT</div>
+                        <div class="grid grid-cols-3 gap-3 mt-6">
+
+                            &lt;!&ndash; Empty &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('empty')">
+                                <div
+                                    class="flex flex-col h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'empty'">
+                                    <div class="flex flex-col flex-auto bg-gray-50 dark:bg-gray-900"></div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'empty'">
+                                    Empty
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Classic &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('classic')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'classic'">
+                                    <div class="w-8 bg-gray-100 dark:bg-gray-800">
+                                        <div class="mt-3 mx-1.5 space-y-1">
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'classic'">
+                                    Classic
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Classy &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('classy')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'classy'">
+                                    <div class="w-8 bg-gray-100 dark:bg-gray-800">
+                                        <div class="flex items-center mt-1 mx-1">
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1 h-1 ml-auto rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1 h-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                        <div class="w-4 h-4 mt-2.5 mx-auto rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="mt-2 mx-1 space-y-1">
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-2">
+                                                <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'classy'">
+                                    Classy
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Compact &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('compact')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'compact'">
+                                    <div class="w-5 bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-3 h-3 mt-2 mx-auto rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="flex flex-col items-center w-full mt-2 space-y-1">
+                                            <div class="w-3 h-2.5 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-2.5 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-2.5 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'compact'">
+                                    Compact
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Dense &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('dense')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'dense'">
+                                    <div class="w-4 bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-2 h-2 mt-2 mx-auto rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="flex flex-col items-center w-full mt-2 space-y-1">
+                                            <div class="w-2 h-2 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-2 h-2 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-2 h-2 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'dense'">
+                                    Dense
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Futuristic &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('futuristic')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'futuristic'">
+                                    <div class="w-8 bg-gray-100 dark:bg-gray-800">
+                                        <div class="flex flex-col flex-auto h-full py-3 px-1.5 space-y-1">
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="flex-auto"></div>
+                                            <div class="h-1 rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'futuristic'">
+                                    Futuristic
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Thin &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('thin')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'thin'">
+                                    <div class="w-3 bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-1.5 h-1.5 mt-2 mx-auto rounded-sm bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="flex flex-col items-center w-full mt-2 space-y-1">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto border-l">
+                                        <div class="h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex items-center justify-end h-full mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'thin'">
+                                    Thin
+                                </div>
+                            </div>
+
+                            <div class="col-span-2"></div>
+
+                            &lt;!&ndash; Centered &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('centered')">
+                                <div
+                                    class="flex h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'centered'">
+                                    <div class="flex flex-col flex-auto my-1 mx-2 border rounded-md overflow-hidden">
+                                        <div class="flex items-center h-3 bg-gray-100 dark:bg-gray-800">
+                                            <div class="flex ml-1.5">
+                                                <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-3 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-3 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-3 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                            <div class="flex items-center justify-end ml-auto mr-1.5">
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 ml-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'centered'">
+                                    Centered
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Enterprise &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('enterprise')">
+                                <div
+                                    class="flex flex-col h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'enterprise'">
+                                    <div class="flex items-center h-3 px-2 bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="flex items-center justify-end ml-auto space-x-1">
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center h-3 px-2 border-t border-b space-x-1 bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto my-1 mx-2 border rounded overflow-hidden">
+                                        <div class="flex flex-auto bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'enterprise'">
+                                    Enterprise
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Material &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('material')">
+                                <div
+                                    class="flex flex-col h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'material'">
+                                    <div class="flex flex-col flex-auto my-1 mx-2 border rounded overflow-hidden">
+                                        <div class="flex items-center h-4 px-2 bg-gray-100 dark:bg-gray-800">
+                                            <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="flex items-center justify-end ml-auto space-x-1">
+                                                <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                                <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center h-2 px-2 space-x-1 bg-gray-100 dark:bg-gray-800">
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                        <div class="flex flex-auto border-t bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'material'">
+                                    Material
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; Modern &ndash;&gt;
+                            <div
+                                class="flex flex-col cursor-pointer"
+                                (click)="setLayout('modern')">
+                                <div
+                                    class="flex flex-col h-20 rounded-md overflow-hidden border-2 hover:opacity-80"
+                                    [class.border-primary]="config.layout === 'modern'">
+                                    <div class="flex items-center h-4 px-2 border-b bg-gray-100 dark:bg-gray-800">
+                                        <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        <div class="flex items-center h-3 ml-2 space-x-1">
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-3 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                        <div class="flex items-center justify-end ml-auto space-x-1">
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                            <div class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col flex-auto">
+                                        <div class="flex flex-auto bg-gray-50 dark:bg-gray-900"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-2 text-md font-medium text-center text-secondary"
+                                    [class.text-primary]="config.layout === 'modern'">
+                                    Modern
+                                </div>
+                            </div>
+
+                        </div>-->
+
+
+
+
+            </div>
+        </section>
+
+
+        <section class="flex flex-col gap-4">
+
+            <div class=" flex flex-row gap-8 ">
+                <a
+                    [href]="'https://www.instagram.com/volleyballgo_insta'"
+                    target="_blank"
+                    class="font-medium cursor-pointer items-center"
+                    mat-icon-button
+                    aria-label="insta"
+                >
+                    <mat-icon   [class.text-secondary]="config.scheme !== 'dark'" class="" [svgIcon]="'feather:instagram'"></mat-icon>
+                </a>
+
+                <a
+                    [href]="'https://vk.com/volleyballgo'"
+                    target="_blank"
+                    mat-button
+                    class="font-medium cursor-pointer items-center w-6 "
+                    aria-label="vk"
+
+                >
+
+                    <img width="50" height="50" ngSrc="../../../../assets/icons/vk-black.png">
+                </a>
+            </div>
+
+            <div class="flex flex-row justify-between">
+                <a [class.text-secondary]="config.scheme !== 'dark'" class="font-medium text-secondary text-sm cursor-pointer" href="https://www.linkedin.com/in/shabunyaserzh/">© 2016 Serzh Shabunya. All Rights Reserved</a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </aside>
+
+</ng-template>

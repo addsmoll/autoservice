@@ -1,0 +1,17 @@
+.breadcrumb{
+    font-size: 13px;
+    a{
+        text-decoration: none;
+    }
+
+    .breadcrumb-title.active{
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+    .breadcrumb-item+.breadcrumb-item:before{
+        display: inline-block;
+        padding-right: .5rem;
+        padding-left: .5rem;
+        content: "/";
+    }
+}

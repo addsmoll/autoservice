@@ -1,0 +1,356 @@
+<div class="relative flex flex-col flex-auto min-w-0  overflow-hidden">
+
+    <!-- Header & Cards -->
+    <div class="relative pt-4 pb-6 sm:pt-4 sm:pb-24 px-6 sm:px-16 overflow-hidden">
+        <svg class="-z-1 absolute inset-0"
+             viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="opacity-40 text-gray-200 dark:text-gray-800" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+
+        <div class="flex flex-col items-center">
+            <section class="flex flex-col sm:flex-row gap-4">
+                <div class=" sm:text-2xl text-center tracking-tight ">
+                    <span style="font-size: 50px; ">🚗</span>  <span style="font-size: 30px; ">🔧</span>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-center">
+                        {{ 'Мастерская автоэлектроники' }}
+                    </h1>
+                    <h2 class="text-secondary">{{ 'Ремонт и диагностика автоэлектрики' }}</h2>
+                    <ul>
+                        <li>
+                            <h3 class="lg:text-lg text-md text-start indent-8 text-secondary mt-4">{{ 'Решение проблем с работой двигателя' }}</h3>
+                        </li>
+
+                        <li>
+                            <h3 class="lg:text-lg text-md text-start indent-8 text-secondary mt-1">{{ 'Срочный выезд по городу Молодечно и региону' }}</h3>
+                        </li>
+                    </ul>
+
+
+
+                    <!--<div class="flex flex-row gap-1 items-center mt-4">
+                        <mat-icon class="icon-size-5 lg:icon-size-6 text-primary" [svgIcon]="'feather:map-pin'"></mat-icon>
+                        <div class="lg:text-lg text-md text-secondary flex flex-row gap-1">
+                            <span>
+                                 {{ 'Возможен выезд!' }}
+                            </span>
+                            @if (cityName){
+                                <span>
+                                      {{ 'город Молодечно' }}
+                                </span>
+                                <span>
+                                    {{cityName}}
+                                </span>
+                            }
+                        </div>
+                    </div>-->
+
+                    <h3 class="text-lg lg:text-2xl text-start font-semibold indent-8 my-4">{{ 'Тел.: (8-029)250-11-32' }}</h3>
+                    <div class="flex gap-4">
+                        <a href="https://t.me/addpaint" target="_blank" rel="noopener noreferrer"
+                           class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl shadow-md transition">
+                            Написать в Telegram
+                        </a>
+
+                        <a href="viber://chat?number=%2B375292501132" target="_blank" rel="noopener noreferrer"
+                           class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl shadow-md transition">
+                            Написать в Viber
+                        </a>
+                    </div>
+                    <!--     <div class="grid grid-cols-1 gap-y-4 mt-4">
+                             @for (feature of OfferCorpFeatures; track feature?.id; let i = $index) {
+                                 @if (i<=1){
+                                     <div class="flex flex-row gap-1 items-center">
+                                         <mat-icon class="icon-size-5 lg:icon-size-6 text-primary" [svgIcon]="feature.icon"></mat-icon>
+                                         <div class=" lg:text-lg text-md text-secondary">{{ feature.name }}</div>
+                                     </div>
+                                 }
+
+                             }
+                         </div>-->
+                </div>
+            <!--    <img
+                    width="605" height="602"
+                    loading="lazy"
+                    class="object-cover max-w-100"
+                    ngSrc="images/offers/title.jpg"
+                    alt="Card cover image"
+                />-->
+
+            </section>
+
+        </div>
+
+
+    </div>
+
+    <section class="self-center flex flex-col gap-2">
+
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-2 ">
+
+            <section class="filter-article flex w-full max-w-80 max-h-120 flex-col">
+                <img
+                    width="850" height="614"
+                    loading="lazy"
+                    class="object-cover "
+                    ngSrc="assets/images/offers/ad4.jpg"
+                    alt="Card cover image"
+                />
+                <div class="m-8">
+                    <div class="text-lg font-semibold leading-tight text-center">
+                        {{ 'Дианостика систем двигателя' }}
+
+                    </div>
+
+                </div>
+            </section>
+            <section class="filter-article flex w-full max-w-80 max-h-120 flex-col">
+                <img
+                    width="450" height="300"
+                    loading="lazy"
+                    class="object-cover"
+                    ngSrc="assets/images/offers/ad2.jpg"
+                    alt="Card cover image"
+                />
+                <div class="m-8">
+                    <div class="text-lg font-semibold leading-tight">
+                        {{ 'Ремонт автэлектрики' }}
+                    </div>
+
+                </div>
+            </section>
+            <section class="filter-article flex w-full max-w-80 max-h-120 flex-col">
+                <img
+                    width="418" height="287"
+
+                    loading="lazy"
+                    class="object-cover"
+                    ngSrc="assets/images/offers/ad3.jpg"
+                    alt="Card cover image"
+                />
+                <div class="m-8">
+                    <div class="text-lg font-semibold leading-tight">
+                        {{ 'Запуск незаводных авто на выезде' }}
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+    </section>
+
+
+<!--            <h2 class="self-center mt-8 sm:mt-12 ml-4 text-primary uppercase text-lg">{{'OFFER.OUR_OFFER'}}</h2>-->
+
+   <!-- <section class="self-center filter-article flex w-full max-w-160 flex-col">
+        <img
+            loading="lazy"
+            width="1200" height="1200"
+            class="object-cover"
+            ngSrc="../../../../assets/images/offers/ticket3.jpg"
+            alt="Card cover image"
+        />
+    </section>-->
+
+
+
+<!--
+    <section class="flex flex-row justify-center ">
+        <div class="flex flex-col gap-1 items-center  ">
+            <h2 class="text-xl font-semibold"> {{ 'OFFER.TEXT_REQUEST' }}</h2>
+            <h3 class="text-md text-secondary"> {{ 'OFFER.TEXT_REQUEST_NOTE' }}</h3>
+
+        </div>
+
+
+    </section>
+-->
+
+
+
+<!--
+    &lt;!&ndash; Features &ndash;&gt;
+    <div class="flex flex-col items-center px-6 py-10 sm:px-16 sm:pt-18 sm:pb-20 bg-white dark:bg-gray-800">
+        <div class="w-full max-w-7xl">
+            <div>
+                <div class="text-4xl font-extrabold tracking-tight leading-tight">
+                    {{ 'OFFER.FEATURES_TITLE' }}
+                </div>
+                <div class="max-w-xl mt-2 text-xl text-secondary">
+                    {{ 'OFFER.FEATURES_DESCRIPTION' }}
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16 w-full mt-12 sm:mt-16">
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_CREATE_EDIT' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_CREATE_EDIT_DESC' }}
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:filter'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_SEARCH_FILTER' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_SEARCH_FILTER_DESC' }}
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:refresh'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_REALTIME_UPDATES' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_REALTIME_UPDATES_DESC' }}
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_META_INFO' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_META_INFO_DESC' }}
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_PRE_RENDERED' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_PRE_RENDERED_DESC' }}
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">{{ 'OFFER.FEATURE_SIMPLE_ANALYTICS' }}</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        {{ 'OFFER.FEATURE_SIMPLE_ANALYTICS_DESC' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &lt;!&ndash; CTA &ndash;&gt;
+
+    <div class="px-6 py-10 sm:px-16 sm:pt-18 sm:pb-20 bg-primary-600 text-on-primary-600">
+        <div class="flex flex-col items-center w-full max-w-7xl mx-auto text-center">
+            <div class="text-3xl sm:text-4xl sm:text-5xl font-extrabold leading-6 sm:leading-10">
+                {{ 'OFFER.CTA_TITLE' }}
+            </div>
+            <div class="mt-2 text-3xl sm:text-4xl sm:text-5xl font-extrabold leading-6 sm:leading-10 text-black text-opacity-60">
+                {{ 'OFFER.CTA_SUBTITLE' }}
+            </div>
+            <button
+                mat-flat-button
+                class="fuse-mat-button-large mt-8 px-12 bg-white text-primary-800">
+                <span class="text-lg">{{ 'OFFER.CTA_BUTTON' }}</span>
+            </button>
+        </div>
+    </div>
+    &lt;!&ndash; Frequently asked questions &ndash;&gt;
+    <div class="flex flex-col items-center pt-12 sm:pt-18 pb-8 sm:pb-20 px-6 sm:px-16 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full max-w-7xl">
+            <div>
+                <div class="text-4xl font-extrabold tracking-tight leading-tight">
+                    Frequently asked questions
+                </div>
+                <div class="max-w-xl mt-2 text-xl text-secondary">
+                    Here are the most frequently asked questions you may check before getting started
+                </div>
+            </div>
+            &lt;!&ndash; FAQs grid &ndash;&gt;
+            <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:gap-x-16 w-full mt-12 sm:mt-16">
+                <div>
+                    <div class="text-xl font-semibold">
+                        What is the duration of the free trial?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Our app is free to try for 14 days, if you want more, you can provide
+                            payment details which will extend your trial to 30 days providing you
+                            an extra 16 more days to try our app.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        Are there discounts for non-profits or educational use?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Yes, our Personal and Premium packages are free for non-profits and
+                            educational use. E-mail your details to us after starting your Free
+                            Trial and we will upgrade your account if you qualify.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        What is the storage is for?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Since we provide an extremely detailed reporting and analytics
+                            tool, they require quite a bit storage space. For average use, you
+                            don’t have to worry about running out of space since the
+                            Personal package limits the projects you can have.
+                        </p>
+                        <p class="mt-2">
+                            For some reason if you run out of space, contact us and we will
+                            see what can be done about it and make sure you are not
+                            generating unnecessary reports and/or analytics data.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        What happens if I’m not satisfied?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            If you are still in your free trial period, you can cancel your
+                            account at anytime with a single click of a button. If you already
+                            paid for your first month, we also offer 30-day money-back
+                            guarantee with no questions asked.
+                        </p>
+                        <p class="mt-2">
+                            After first month, you can still cancel your account at any time
+                            but we will calculate the amount that corresponds to days you
+                            have been using our app for that month and refund only the
+                            remaining amount.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+    <section class="flex flex-row flex-wrap justify-between self-center">
+
+
+
+        <div class="flex flex-row gap-2 mt-auto p-2">
+
+            <p class="text-xs  ">
+                {{'Индивидуальный предприниматель Шабуня С.Д. УНП 691518323'}}
+            </p>
+
+            <p class="text-xs   ">
+                {{'© Все права защищены 2025 г.'}}
+            </p>
+        </div>
+
+
+    </section>
+
+</div>

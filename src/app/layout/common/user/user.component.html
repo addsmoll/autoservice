@@ -1,0 +1,88 @@
+<ng-template #noAuth>
+    <a
+            aria-label="account"
+            [routerLink]="['/sign-in']"
+            class="flex flex-row flex-nowrap"
+    >
+        <span class=" primary hidden sm:block truncate overflow-hidden">{{'AUTH.HAVE_AN_ACCOUNT' | translate}}</span>
+        <span  class="text-primary-700 underline shrink-0 text-lg font-semibold sm:ml-4 hover:underline">{{'AUTH.LOG_IN' | translate}}</span>
+    </a>
+</ng-template>
+
+
+    <div class="relative" *ngIf="user?.id; else noAuth"  [matMenuTriggerFor]="userActions">
+
+     <div class="flex flex-row gap-2 " *ngIf="user.avatars" >
+        <app-avatar [avatars]="user.avatars"></app-avatar>
+         <ng-content></ng-content>
+    </div>
+
+        <button mat-icon-button *ngIf="!user.avatars">
+            <mat-icon
+                [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+        </button>
+    </div>
+
+
+<mat-menu
+    [xPosition]="'before'"
+    #userActions="matMenu">
+    <button mat-menu-item>
+        <span class="flex flex-col gap-2 leading-none">
+            <span>{{'NAV.SIGN_AS' | translate}}</span>
+            <app-provider [user]="user"></app-provider>
+
+        </span>
+    </button>
+    <mat-divider class="my-2"></mat-divider>
+    <button mat-menu-item (click)="gotoProfile()">
+        <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+        <span>{{'NAV.PROFILE' | translate}}</span>
+    </button>
+    <button mat-menu-item (click)="gotoSettings()">
+        <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+        <span>{{'NAV.SETTINGS' | translate}}</span>
+    </button>
+    <!--<button
+        mat-menu-item
+        [matMenuTriggerFor]="userStatus">
+        <mat-icon [svgIcon]="'heroicons_outline:dots-circle-horizontal'"></mat-icon>
+        <span>{{'NAV.STATUS' | translate}}</span>
+    </button>-->
+    <mat-divider class="my-2"></mat-divider>
+    <button
+        mat-menu-item
+        (click)="signOut()">
+        <mat-icon [svgIcon]="'heroicons_outline:logout'"></mat-icon>
+        <span>{{'NAV.SIGN_OUT' | translate}}</span>
+    </button>
+</mat-menu>
+
+<mat-menu
+    class="user-status-menu"
+    #userStatus="matMenu">
+    <button
+        mat-menu-item
+        (click)="updateUserStatus('online')">
+        <span class="w-4 h-4 mr-3 rounded-full bg-green-500"></span>
+        <span>{{'NAV.ONLINE' | translate}}</span>
+    </button>
+    <button
+        mat-menu-item
+        (click)="updateUserStatus('away')">
+        <span class="w-4 h-4 mr-3 rounded-full bg-amber-500"></span>
+        <span>{{'NAV.WANT_INVITE' | translate}}</span>
+    </button>
+<!--    <button-->
+<!--        mat-menu-item-->
+<!--        (click)="updateUserStatus('busy')">-->
+<!--        <span class="w-4 h-4 mr-3 rounded-full bg-red-500"></span>-->
+<!--        <span>Busy</span>-->
+<!--    </button>-->
+    <button
+        mat-menu-item
+        (click)="updateUserStatus('not-visible')">
+        <span class="w-4 h-4 mr-3 rounded-full bg-gray-400"></span>
+        <span>{{'NAV.NO_PLAY' | translate}}</span>
+    </button>
+</mat-menu>
