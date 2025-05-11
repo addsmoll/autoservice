@@ -24,7 +24,7 @@ jobs:
             - name: 🏗 Build Angular app (browser + server)
               run: |
 
-                  npm run prerender
+                  npm run prerender:ssr
 
             - name: 📁 Copy pre-rendered output
               run: |
