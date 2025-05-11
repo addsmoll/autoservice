@@ -3,7 +3,7 @@ name: Deploy Angular SSR Prerendered App to GitHub Pages
 on:
     push:
         branches:
-            - master  # или master, если используешь его
+            - master
 
 jobs:
     build-and-deploy:
