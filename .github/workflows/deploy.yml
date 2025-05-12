@@ -34,7 +34,7 @@ jobs:
                   mkdir deploy
                   cp -r dist/browser/* deploy/
                   touch deploy/.nojekyll
-
+                  echo 'sergeyshabunya.by' > deploy/CNAME
 
 
             - name: 🚀 Deploy to GitHub Pages
