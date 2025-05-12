@@ -1,0 +1,266 @@
+<div class="favorites-container ml-5" [class.show-list]="toggle" *ngIf="showArrow">
+    <ul  class="list-inline mb-0">
+        <li class="list-inline-item">
+            <span class="fs-13 font-italic">
+<!--                Choose favorites-->
+          <mat-icon id="arrow" [svgIcon]="'heroicons_outline:arrow-narrow-right'"></mat-icon>
+        </span>
+            <button
+                aria-label="open favorites"
+                mat-icon-button
+                (click)="openPanel()"
+                #favoritesOrigin>
+                <mat-icon [svgIcon]="'heroicons_outline:heart'"></mat-icon>
+            </button>
+        </li>
+
+    </ul>
+</div>
+<button *ngIf="!showArrow"
+        aria-label="open favorites"
+        mat-icon-button
+        (click)="openPanel()"
+        #favoritesOrigin>
+    <mat-icon [svgIcon]="'heroicons_outline:heart'"></mat-icon>
+</button>
+
+
+<!--@defer (on interaction(favoritesOrigin)){-->
+<!--<ng-container *ngTemplateOutlet="favoritesPanel"></ng-container>-->
+<!--} @placeholder{-->
+<!--<div>Loading..</div>-->
+<!--}-->
+
+
+
+<!-- Favorites panel -->
+<ng-template #favoritesPanel>
+    <div class="fixed inset-0 sm:static sm:inset-auto flex flex-col sm:min-w-90 sm:w-90 sm:rounded-2xl overflow-hidden shadow-lg">
+
+        <!-- Header -->
+        <div class="flex flex-shrink-0 items-center py-4 pr-4 pl-6 bg-primary text-white">
+            <div class="sm:hidden -ml-1 mr-3">
+                <button
+                    aria-label="close favorites panel"
+                    mat-icon-button
+                    (click)="closePanel()">
+                    <mat-icon
+                        class="icon-size-5 text-current"
+                        [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </button>
+            </div>
+            <div class="flex items-center text-lg font-medium leading-10">
+
+
+                <span class="">{{'BOARD.FAVORITES' | translate}}</span>
+                <ng-container *ngIf="mode !== 'view'">
+                    <span class="ml-1">
+                        <ng-container *ngIf="mode === 'add'">-{{'BOARD.ADD_NEW' | translate}}</ng-container>
+                        <ng-container *ngIf="mode === 'modify' || mode === 'edit'">- {{'BOARD.EDIT' | translate}}</ng-container>
+                    </span>
+                </ng-container>
+            </div>
+            <div class="ml-auto">
+
+                <!-- View mode -->
+                <ng-container *ngIf="mode === 'view'">
+                    <!-- Enter 'modify' mode -->
+                    <button
+                        aria-label="change mode"
+                        mat-icon-button
+                        (click)="changeMode('modify')"
+                        [matTooltip]="'BOARD.ENTER_EDIT_MODE' | translate">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
+                    </button>
+                    <!-- Enter 'add' mode -->
+                    <button
+                        aria-label="new favorite"
+                        mat-icon-button
+                        (click)="newFavorite()"
+                        [matTooltip]="'BOARD.ADD_TO_FAVORITES' | translate">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+                    </button>
+                </ng-container>
+
+                <!-- Modify mode -->
+                <ng-container *ngIf="mode === 'modify'">
+                    <!-- Enter 'view' mode -->
+                    <button
+                        aria-label="change mode"
+                        mat-icon-button
+                        (click)="changeMode('view')"
+                        [matTooltip]="'BOARD.EXIT_EDIT_MODE' | translate">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                    </button>
+                </ng-container>
+
+                <!-- Add mode -->
+                <ng-container *ngIf="mode === 'add'">
+                    <!-- Enter 'view' mode -->
+                    <button
+                        aria-label="change mode"
+                        mat-icon-button
+                        (click)="changeMode('view')"
+                        [matTooltip]="'BOARD.CANCEL' | translate">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_outline:x-circle'"></mat-icon>
+                    </button>
+                </ng-container>
+
+                <!-- Edit mode -->
+                <ng-container *ngIf="mode === 'edit'">
+                    <!-- Enter 'modify' mode -->
+                    <button
+                        aria-label="cancel"
+                        mat-icon-button
+                        (click)="changeMode('modify')"
+                        [matTooltip]="'BOARD.CANCEL' | translate">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_outline:x-circle'"></mat-icon>
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="relative flex flex-col flex-auto sm:max-h-120 -mb-px overflow-y-auto bg-card">
+
+            <!-- View mode -->
+            <ng-container *ngIf="mode === 'view' || mode === 'modify'">
+
+                <!-- Favorites -->
+                <div class="grid grid-cols-2 grid-flow-row">
+                    <!-- Favorite -->
+                    <ng-container *ngFor="let favorite of favorites(); trackBy: trackByFn">
+                        <div class="relative group flex flex-col overflow-hidden bg-card border-r border-b even:border-r-0 hover:bg-gray-50 dark:hover:bg-black dark:hover:bg-opacity-5">
+                            <ng-container *ngIf="mode === 'modify'">
+                                <div
+                                    class="absolute inset-0 z-99 cursor-pointer"
+                                    (click)="editFavorite(favorite)">
+                                </div>
+                            </ng-container>
+
+                            <!-- Router links -->
+                            <a
+                                (click)="onFavoriteSelect(favorite)"
+                                class="flex flex-col items-center justify-center w-full h-full py-6 no-underline"
+                                [ngClass]="{'pointer-events-none': mode === 'modify'}"
+
+                            >
+<!--                                [routerLink]="favorite?.link"-->
+                                <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+                            </a>
+                            <!-- Link content template -->
+                            <ng-template #linkContent>
+                                <div class="relative flex flex-shrink-0 items-center justify-center w-11/12 mb-3 bg-gray-100 dark:bg-gray-700">
+                                    <div *ngFor="let image of favorite?.images; let i = index">
+                                        <div *ngIf="i === 0">
+                                            <img
+                                                class=" object-cover w-full h-full"
+                                                [src]="image | zipImageUrlPipe" alt="No place image"
+                                            >
+                                            <mat-icon
+                                                class="absolute opacity-0 group-hover:opacity-100 z-20 icon-size-5"
+                                                *ngIf="mode === 'modify'"
+                                                [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+<!--                                            <mat-icon-->
+<!--                                                class="z-10"-->
+<!--                                                [ngClass]="{'group-hover:opacity-0': mode === 'modify'}"-->
+<!--                                                [svgIcon]="favorite?.icon"></mat-icon>-->
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="font-medium text-center">{{favorite?.label}}</div>
+                                <div class="text-md text-center text-secondary">{{favorite?.description}}</div>
+                            </ng-template>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- No favorites -->
+                <ng-container *ngIf="!favorites() || !favorites()?.length">
+                    <div class="flex flex-col flex-auto items-center justify-center sm:justify-start py-12 px-8">
+                        <div class="flex flex-0 items-center justify-center w-14 h-14 rounded-full bg-primary-100 dark:bg-primary-600">
+                            <mat-icon
+                                class="text-primary-700 dark:text-primary-50"
+                                [svgIcon]="'heroicons_outline:heart'"></mat-icon>
+                        </div>
+                        <div class="mt-5 text-2xl font-semibold tracking-tight">{{'BOARD.NO_FAVORITES' | translate}}</div>
+                        <div class="w-full max-w-60 mt-1 text-md text-center text-secondary">{{'BOARD.NO_FAVORITES_NOTE' | translate}}</div>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <!-- Add/Edit mode -->
+            <ng-container *ngIf="mode === 'add' || mode === 'edit'">
+                <form
+                    class="p-6"
+                    [formGroup]="favoriteForm">
+                    <app-place-selector (placeChange)="onPlaceSelect($event)"></app-place-selector>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>{{'BOARD.LABEL' | translate}}</mat-label>
+                        <input
+                            matInput
+                            [formControlName]="'label'"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>{{'BOARD.ADDRESS' | translate}}</mat-label>
+                        <input
+                            matInput
+                            [formControlName]="'description'">
+                    </mat-form-field>
+                  <!--  <mat-form-field class="w-full">
+                        <mat-label>{{'BOARD.ICON' | translate}}</mat-label>
+                        <input
+                            matInput
+                            [formControlName]="'icon'"
+                            required>
+                    </mat-form-field>-->
+                    <mat-form-field class="w-full">
+                        <mat-label>{{'BOARD.LINK' | translate}}</mat-label>
+                        <input
+                            matInput
+                            [formControlName]="'link'"
+                            required>
+                    </mat-form-field>
+                    <mat-slide-toggle
+                        [color]="'primary'"
+                        [formControlName]="'getInvite'">
+                        {{'BOARD.GET_INVITE' | translate}}
+                    </mat-slide-toggle>
+                    <!-- Actions -->
+                    <div class="flex items-center justify-end mt-4">
+                        <button
+                            class="mr-2"
+                            *ngIf="mode === 'edit'"
+                            mat-flat-button
+                            type="button"
+                            (click)="delete()">
+                            {{'BOARD.DELETE' | translate}}
+                        </button>
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            [disabled]="!favoriteForm.valid"
+                            type="button"
+                            (click)="save()">
+                            <ng-container *ngIf="mode === 'add'">{{'BOARD.ADD' | translate}}</ng-container>
+                            <ng-container *ngIf="mode === 'edit'">{{'BOARD.UPDATE' | translate}}</ng-container>
+                        </button>
+                    </div>
+                </form>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>

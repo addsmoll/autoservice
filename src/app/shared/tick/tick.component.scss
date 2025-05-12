@@ -1,0 +1,13 @@
+.tick {
+    font-size: 0.4em
+}
+::ng-deep {
+    #dots-size .tick-dots-dot {
+        width: 2px;
+        height: 2px;
+        margin: 0.4px;
+        border-radius: 50%;
+
+    }
+}
+

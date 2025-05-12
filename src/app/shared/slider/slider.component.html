@@ -1,0 +1,28 @@
+<div class="">
+
+    <div id="slider-container" class="flex flex-row" >
+        <div id="slider"
+             class="flex-row flex gap-2 "
+             scrollable-duration="300"
+             scrollable-slide-size="200"
+             [scrollable-source]="source"
+             scrollable>
+
+            <div class="flex flex-row gap-2  ">
+                <div class="flex flex-col gap-1 flex-shrink-0 max-w-24 min-w-24 overflow-hidden" *ngFor="let contact of source; let i = index">
+                    <div class="" *ngIf="contact?.avatars?.length > 0">
+                        <app-avatar [avatars]="contact?.avatars" [size]="isMobile?10:16" [isWithMenu]="true">
+
+                            <!--             <div>
+                                             <p *ngIf="contact?.logo?.imageUrl" class="text-xs font-medium truncate">{{contact?.name}}</p>
+                                         </div>-->
+                        </app-avatar>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

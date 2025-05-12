@@ -1,0 +1,125 @@
+<!-- Notifications toggle -->
+<button
+    *ngIf="events() && events()?.length > 0 && !(events()[0].start | isOverdue)"
+    mat-icon-button
+    class="quick-panel-toggle-button portal-notification"
+    (click)="openPanel()"
+    aria-label="Open notification panel"
+    #notificationsOrigin>
+    <ng-container *ngIf="unreadCount > 0">
+        <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3">
+            <span class="flex items-center justify-center flex-shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-teal-600 text-indigo-50 text-xs font-medium">
+                {{unreadCount}}
+            </span>
+        </span>
+    </ng-container>
+    <mat-icon [svgIcon]="'heroicons_outline:bell'"></mat-icon>
+</button>
+<!-- Notifications panel -->
+
+<ng-template #notificationsPanel>
+
+    <div class="fixed inset-0 sm:static sm:inset-auto flex flex-col sm:min-w-90 sm:w-90 sm:rounded-2xl overflow-hidden shadow-lg">
+
+        <!-- Header -->
+        <div class="flex flex-shrink-0 items-center py-4 pr-4 pl-6 bg-primary text-white">
+            <div class="sm:hidden -ml-1 mr-3">
+                <button
+                    mat-icon-button
+                    (click)="closePanel()">
+                    <mat-icon
+                        class="icon-size-5 text-current"
+                        [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </button>
+            </div>
+            <div class="text-lg font-medium leading-10">{{'NAV.NOTIFICATIONS' | translate}}</div>
+            <div class="ml-auto text-white">
+
+                <button
+                    mat-icon-button
+                    [matTooltip]="'Mark all as read'"
+                    [disabled]="unreadCount === 0"
+                    (click)="markAllAsRead()">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_outline:calendar'"></mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative flex flex-col flex-auto sm:max-h-120 divide-y overflow-y-auto bg-card">
+            <!-- Notifications -->
+            <ng-container *ngFor="let event of events(); trackBy: trackByFn">
+                <app-event-notifications-item [userId]="user()?.id" [event]="event"></app-event-notifications-item>
+            </ng-container>
+
+            <!-- No notifications -->
+            <ng-container *ngIf="!events()|| !events().length">
+                <div class="flex flex-col flex-auto items-center justify-center sm:justify-start py-12 px-8">
+                    <div class="flex flex-0 items-center justify-center w-14 h-14 rounded-full bg-primary-100 dark:bg-primary-600">
+                        <mat-icon
+                            class="text-primary-700 dark:text-primary-50"
+                            [svgIcon]="'heroicons_outline:bell'"></mat-icon>
+                    </div>
+                    <div class="mt-5 text-2xl font-semibold tracking-tight">{{'NAV.NO_NOTIFICATIONS' | translate}}</div>
+                    <div class="w-full max-w-60 mt-1 text-md text-center text-secondary">{{'NAV.NO_NOTIFICATIONS_NOTE' | translate}}</div>
+                </div>
+            </ng-container>
+
+        </div>
+
+    </div>
+
+</ng-template>
+
+
+<fuse-drawer
+    class="w-screen min-w-screen sm:w-100 sm:min-w-100 z-999"
+    fixed
+    [mode]="'over'"
+    [name]="'settingsDrawer'"
+    [position]="'left'"
+    #eventDrawer>
+
+<!--    <event-details></event-details>-->
+    <div class="flex flex-col w-full overflow-auto bg-card">
+        <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+            <mat-icon
+                class="icon-size-7 text-current"
+                [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+            <div class="ml-3 text-2xl font-semibold tracking-tight">Settings</div>
+            <button
+                class="ml-auto"
+                mat-icon-button
+              >
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="'heroicons_outline:x'"></mat-icon>
+            </button>
+        </div>
+
+        <div class="flex flex-col p-6">
+
+            <!-- Theme -->
+            <div class="text-md font-semibold text-secondary">THEME</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+
+            </div>
+
+            <hr class="my-8">
+
+            <!-- Scheme -->
+            <div class="text-md font-semibold text-secondary">SCHEME</div>
+
+            <hr class="my-8">
+
+            <!-- Layout -->
+            <div class="text-md font-semibold text-secondary">LAYOUT</div>
+
+
+        </div>
+
+    </div>
+
+</fuse-drawer>
