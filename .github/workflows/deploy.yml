@@ -32,7 +32,7 @@ jobs:
             - name: 📁 Copy pre-rendered output
               run: |
                   mkdir deploy
-                  cp -r dist/* deploy/
+                  cp -r dist/browser/* deploy/
                   touch deploy/.nojekyll
 
 
