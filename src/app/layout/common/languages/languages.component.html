@@ -1,0 +1,40 @@
+<div class="flex flex-row">
+    <span *ngIf="isSetupText" class="text-md self-center">{{'NAV.LANGUAGE' | translate}}<b *ngIf="isSetupText">:</b></span>
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="languages" class="ml-1">
+        <span class="text-lg text-{{isSetupText ? 'primary' : 'accent'}}">{{activeLang}}</span>
+    </button>
+</div>
+
+<!-- Language menu -->
+<mat-menu
+    [xPosition]="'before'"
+    #languages="matMenu">
+    <ng-template matMenuContent>
+        <ng-container *ngFor="let lang of availableLangs; trackBy: trackByFn">
+            <button
+                mat-menu-item
+                (click)="setActiveLang(lang)">
+            <span class="flex items-center">
+                <ng-container *ngTemplateOutlet="flagImage; context: {$implicit: lang}"></ng-container>
+                <span class="ml-3 ">{{lang}}</span>
+            </span>
+            </button>
+        </ng-container>
+    </ng-template>
+
+</mat-menu>
+
+<!-- Flag image template -->
+<ng-template
+    let-lang
+    #flagImage>
+    <span class="relative w-6 shadow rounded-sm overflow-hidden">
+        <span class="absolute inset-0 ring-1 ring-inset ring-black ring-opacity-10"></span>
+        <img
+            class="w-full block"
+            [src]="'assets/images/flags/' + flagCodes[lang].toUpperCase() + '.svg'"
+            [alt]="'Flag image for ' + lang">
+    </span>
+</ng-template>
