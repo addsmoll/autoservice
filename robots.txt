@@ -2,6 +2,6 @@ User-agent: *
 Disallow: /assets/
 Disallow: /*.pdf$
 
-Sitemap: https://volleyballgo.com/sitemap.xml
+Sitemap: https://sergeyshabunya.by/sitemap.xml
 
 
