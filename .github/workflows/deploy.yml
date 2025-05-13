@@ -32,7 +32,7 @@ jobs:
             - name: 📁 Copy pre-rendered output
               run: |
                   mkdir deploy
-                  cp -r dist/browser/* deploy/
+                  cp -r dist/* deploy/
                   touch deploy/.nojekyll
                   echo 'sergeyshabunya.by' > deploy/CNAME
 
@@ -42,3 +42,4 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_branch: gh-pages
+                  publish_dir: ./browser
