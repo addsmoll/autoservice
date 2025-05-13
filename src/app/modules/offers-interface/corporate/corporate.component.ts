@@ -60,11 +60,7 @@ export class OffersCorporateComponent implements OnInit {
         this.allowedDatesFilter = this.createWeekendFilter()
 
 
-
         this._title.setTitle('Автоэлектрик Молодечно')
-
-
-
 
         this._metaTagService.addTags([
             {
@@ -86,8 +82,7 @@ export class OffersCorporateComponent implements OnInit {
 
             {property: 'og:site_name', content: 'Автомастерская'},
             {property: 'og:type', content: 'website'},
-            // {name: 'date', content: '2020-04-14', scheme: 'YYYY-MM-DD'},
-            {property: 'fb:app_id', content: '334152147569621'},
+
             {property: 'og:locale', content: 'ru'},
             {property: 'og:locale:alternate', content: 'en_GB'},
 
