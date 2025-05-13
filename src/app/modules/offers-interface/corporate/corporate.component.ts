@@ -78,12 +78,12 @@ export class OffersCorporateComponent implements OnInit {
 
             {property: 'og:title', content: 'Автоэлектрик в Молодечно'},
             {property: 'og:description', content: 'Диагностика и ремонт автоэлектрики в Молодечно'},
-            {property: 'og:image', content: ''},
-            {property: 'vk:image', content: ''},
-            {property: 'og:image:width', content: '1336'},
-            {property: 'og:image:height', content: '2195'},
+            {property: 'og:image', content: 'https://sergeyshabunya.by/assets/images/offers/ad3.jpg'},
+            {property: 'vk:image', content: 'https://sergeyshabunya.by/assets/images/offers/ad3.jpg'},
+            {property: 'og:image:width', content: '418'},
+            {property: 'og:image:height', content: '287'},
             {property: 'og:image:alt', content: 'Нет изображения...'},
-            // {property: 'og:url', content: 'https://volleyballgo.com'},
+
             {property: 'og:site_name', content: 'Автомастерская'},
             {property: 'og:type', content: 'website'},
             // {name: 'date', content: '2020-04-14', scheme: 'YYYY-MM-DD'},
