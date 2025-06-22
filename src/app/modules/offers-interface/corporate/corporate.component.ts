@@ -73,7 +73,7 @@ export class OffersCorporateComponent implements OnInit {
             {name: 'description', content: 'Диагностика и ремонт автоэлектрики в Молодечно'},
 
             {property: 'og:title', content: 'Автоэлектрик в Молодечно'},
-            {property: 'og:description', content: 'Диагностика и ремонт автоэлектрики в Молодечно'},
+            {property: 'og:description', content: 'тел.(8-029)250-11-32 (viber, telegram)'},
             {property: 'og:image', content: 'https://sergeyshabunya.by/assets/images/offers/ad3.jpg'},
             {property: 'vk:image', content: 'https://sergeyshabunya.by/assets/images/offers/ad3.jpg'},
             {property: 'og:image:width', content: '418'},
